@@ -1,6 +1,5 @@
 package dao;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import pojo.User;
@@ -16,38 +15,33 @@ public class UserDao {
 
 	public boolean queryByNameAndPwd(String username, String password) {
 		String sql = "SELECT COUNT(*) FROM user WHERE username=? AND `password` = ?";
-		Integer result = (Integer) DBUtil.executeQuery(sql, new DBUtil.ParseResultSet() {
-			@Override
-			public Object parse(ResultSet rs) {
-				int result = 0;
-				try {
-					if (rs.next()) {
-						result = rs.getInt(1);
-					}
-				} catch (SQLException e) {
-					e.printStackTrace();
+		Integer result = (Integer) DBUtil.executeQuery(sql, rs -> {
+			int res = 0;
+			try {
+				if (rs.next()) {
+					res = rs.getInt(1);
 				}
-				return result;
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
+			return res;
 		}, username, password);
 		return result > 0;
+
 	}
 
 	public boolean queryByName(String username) {
 		String sql = "SELECT COUNT(*) FROM user WHERE username=?";
-		Integer result = (Integer) DBUtil.executeQuery(sql, new DBUtil.ParseResultSet() {
-			@Override
-			public Object parse(ResultSet rs) {
-				int result = 0;
-				try {
-					if (rs.next()) {
-						result = rs.getInt(1);
-					}
-				} catch (SQLException e) {
-					e.printStackTrace();
+		Integer result = (Integer) DBUtil.executeQuery(sql, rs -> {
+			int res = 0;
+			try {
+				if (rs.next()) {
+					res = rs.getInt(1);
 				}
-				return result;
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
+			return res;
 		}, username);
 		return result > 0;
 	}

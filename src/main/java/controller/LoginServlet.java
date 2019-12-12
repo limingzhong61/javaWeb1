@@ -27,6 +27,7 @@ public class LoginServlet extends HttpServlet {
 		}
 		if (userDao.queryByNameAndPwd(username, pwd)) {
 			req.setAttribute("info", "登录成功，欢迎" + username + "登录");
+			req.getSession().setAttribute("username", username);
 			req.getRequestDispatcher("index.jsp").forward(req, resp);
 		} else {
 			req.setAttribute("info", "登录失败成功，请重新登录");

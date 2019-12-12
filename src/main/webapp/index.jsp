@@ -9,15 +9,24 @@
 	href="styles/global.css" />
 <link type="text/css" rel="stylesheet" media="all"
 	href="styles/global_color.css" />
+	<style type="text/css">
+		.login-info{
+			float: right;
+		}
+	</style>
+	<%
+		pageContext.setAttribute("APP_PATH", request.getContextPath());
+	%>
 </head>
 <body class="index">
+	<h1 class="login-info">欢迎${username}登录</h1>
 	<!--导航区域开始-->
 	<div id="index_navi">
 		<ul id="menu">
-			<li><a href="index.html" class="index_off"></a></li>
+			<li><a href="index.jsp" class="index_off"></a></li>
 			<li><a href="role/role_list.html" class="role_off"></a></li>
 			<li><a href="admin/admin_list.html" class="admin_off"></a></li>
-			<li><a href="fee/fee_list.html" class="fee_off"></a></li>
+			<li><a href="${APP_PATH}/fee/feeList" class="fee_off"></a></li>
 			<li><a href="account/account_list.html" class="account_off"></a></li>
 			<li><a href="service/service_list.html" class="service_off"></a></li>
 			<li><a href="bill/bill_list.html" class="bill_off"></a></li>

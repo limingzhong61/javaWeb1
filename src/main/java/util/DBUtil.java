@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.util.function.Function;
 
 import javax.sql.DataSource;
 
@@ -93,18 +94,11 @@ public class DBUtil {
 	}
 
 	/**
-	 * @param 接口规定解析方法
-	 */
-	public interface ParseResultSet {
-		Object parse(ResultSet rs);
-	}
-
-	/**
 	 * @param sql
-	 * @param parseResultSet 解析ResultSet的回调函数
+	 * @param Function<ResultSet, Object> parseResultSet 解析ResultSet的函数
 	 * @param args
 	 */
-	public static Object executeQuery(String sql, ParseResultSet parseResultSet, Object... args) {
+	public static Object executeQuery(String sql, Function<ResultSet, Object> parseResultSet, Object... args) {
 		Connection conn = DBUtil.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -115,7 +109,7 @@ public class DBUtil {
 				pstmt.setObject(i + 1, args[i]);
 			}
 			rs = pstmt.executeQuery();
-			parse = parseResultSet.parse(rs);
+			parse = parseResultSet.apply(rs);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -1,31 +1,26 @@
 package pojo;
 
-
 public class User {
 	private Integer userId;
+
 	private String username;
+
 	private String password;
+
 	private String phone;
+
 	private String address;
 
-	public String getAddress() {
-		return address;
+	public Integer getuserId() {
+		return this.userId;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
+	public void setuserId(Integer userId) {
 		this.userId = userId;
 	}
 
 	public String getUsername() {
-		return username;
+		return this.username;
 	}
 
 	public void setUsername(String username) {
@@ -33,7 +28,7 @@ public class User {
 	}
 
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
 
 	public void setPassword(String password) {
@@ -41,16 +36,24 @@ public class User {
 	}
 
 	public String getPhone() {
-		return phone;
+		return this.phone;
 	}
 
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
+	public String getAddress() {
+		return this.address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", phone=" + phone
-				+ "]";
+		return "user [userId=" + userId + ", username=" + username + ", password=" + password + ", phone=" + phone
+				+ ", address=" + address + "]";
 	}
 }
