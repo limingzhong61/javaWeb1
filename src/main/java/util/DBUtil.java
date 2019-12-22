@@ -93,16 +93,41 @@ public class DBUtil {
 		close(pstmt, conn);
 	}
 
+
 	/**
 	 * @param sql
 	 * @param Function<ResultSet, Object> parseResultSet 解析ResultSet的函数
 	 * @param args
 	 */
-	public static Object executeQuery(String sql, Function<ResultSet, Object> parseResultSet, Object... args) {
+//	public static Object executeQuery(String sql, Function<ResultSet, Object> parseResultSet, Object... args) {
+//		Connection conn = DBUtil.getConnection();
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		Object parse = null;
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			for (int i = 0; i < args.length; i++) {
+//				pstmt.setObject(i + 1, args[i]);
+//			}
+//			rs = pstmt.executeQuery();
+//			parse = parseResultSet.apply(rs);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		DBUtil.closeAll(rs, pstmt, conn);
+//		return parse;
+//	}
+	
+	/**
+	 * @param sql
+	 * @param Function<ResultSet, Object> parseResultSet 解析ResultSet的函数
+	 * @param args
+	 */
+	public static<T> T executeQuery(String sql, Function<ResultSet, T> parseResultSet, Object... args) {
 		Connection conn = DBUtil.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		Object parse = null;
+		T parse = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			for (int i = 0; i < args.length; i++) {

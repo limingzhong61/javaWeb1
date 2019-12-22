@@ -5,17 +5,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import pojo.Fee;
 
 public class FeeUtil {
 
-	@SuppressWarnings("unchecked")
 	public static Fee getFeeFromRequest(Map<String, String[]> map) {
 //		 通过Class.forName方式
-		@SuppressWarnings("rawtypes")
-		Class feeClass = null;
+		Class<?> feeClass = null;
 		try {
 			feeClass = Class.forName("pojo.Fee");
 		} catch (ClassNotFoundException e) {
@@ -26,7 +22,7 @@ public class FeeUtil {
 		Field[] fields = feeClass.getDeclaredFields();
 		for (Field field : fields) {
 			String fieldName = field.getName();
-			String[] parameter = map.get(fieldName);
+			Object[] parameter = map.get(fieldName);
 			if (parameter == null) {
 				continue;
 			}

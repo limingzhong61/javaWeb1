@@ -15,7 +15,7 @@ public class UserDao {
 
 	public boolean queryByNameAndPwd(String username, String password) {
 		String sql = "SELECT COUNT(*) FROM user WHERE username=? AND `password` = ?";
-		Integer result = (Integer) DBUtil.executeQuery(sql, rs -> {
+		Integer result =  DBUtil.executeQuery(sql, rs -> {
 			int res = 0;
 			try {
 				if (rs.next()) {
@@ -44,5 +44,9 @@ public class UserDao {
 			return res;
 		}, username);
 		return result > 0;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(new UserDao().queryByNameAndPwd("12","11"));
 	}
 }
